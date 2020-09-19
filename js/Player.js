@@ -3,6 +3,7 @@ class Player {
     this.index = null;
     this.distance = 0;
     this.name = null;
+    this.rank = null;
   }
 
   getCount(){
@@ -30,6 +31,19 @@ class Player {
     var playerInfoRef = database.ref('players');
     playerInfoRef.on("value",(data)=>{
       allPlayers = data.val();
+    })
+  }
+
+  static updatePlayerRank(rank){
+    database.ref('/').update({
+      playerRank: rank
+    })
+  }
+
+  getPlayerRank(){
+    var playerRankRef = database.ref('playerRank');
+    playerRankRef.on("value",(data)=>{
+      this.rank = data.val();
     })
   }
 }
